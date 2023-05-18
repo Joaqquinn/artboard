@@ -18,7 +18,11 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('inicio/',views.inicio,name='inicio'),
-    
-    
+    path("inicio/", views.inicio, name="inicio"),
+    path("sesion/", views.sesion, name="inicioSesion"),
+    path("detalles/", views.detalles, name="detalleFoto"),
+    path("modificarContraseña/", views.modificarContraseña, name="modificarContraseña"),
+    path("perfil/", views.perfil, name="perfil"),
+    path("olvidarContraseña/", views.olvidarContraseña, name="olvidarContraseña"),
+    path("subirFoto/", views.subirFoto, name="subirFoto"),
 ]

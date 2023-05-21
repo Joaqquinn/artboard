@@ -39,7 +39,7 @@ class Comentario(models.Model):
     idPublicacion = models.ForeignKey(Publicacion, on_delete=models.CASCADE, verbose_name='Id publicacion')
     idUsuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name='Id usuario')
     comentario = models.TextField(max_length=500)
-    fechaComentario = models.DateField(_(""), auto_now=False, auto_now_add=False)
+    fechaComentario = models.DateField((""), auto_now=False, auto_now_add=False)
     estatus = models.CharField(max_length=50)
     
 

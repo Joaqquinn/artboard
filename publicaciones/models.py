@@ -21,9 +21,8 @@ class Publicacion(models.Model):
     idPublicacion = models.AutoField(primary_key=True,verbose_name='Codigo Publicacion')
     titulo = models.CharField(max_length=50)
     descripcion = models.TextField(max_length=500)
-    fechaPublicacion = models.DateField(_(""), auto_now=False, auto_now_add=False)
+    fechaPublicacion = models.DateField(auto_now=False, auto_now_add=False)
     estatus = models.CharField(max_length=50)
-    foto = models.ImageField()
     idusuario =models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name='Id usuario')
     
     

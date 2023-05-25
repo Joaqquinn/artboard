@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,17 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>   
-        $(document).ready(function() {
-            $('#registro').submit(function(event) {
-              var nombre = $('#nombre').val();
-              if (!/^[a-zA-Z]+$/.test(nombre)) {
-                event.preventDefault();
-                $('#error-nombre').text('El nombre solo debe contener letras.');
-              }
-            });
-          });
-        
+    <script>
+      $(document).ready(function () {
+        $("#registro").submit(function (event) {
+          var nombre = $("#nombre").val();
+          if (!/^[a-zA-Z]+$/.test(nombre)) {
+            event.preventDefault();
+            $("#error-nombre").text("El nombre solo debe contener letras.");
+          }
+        });
+      });
     </script>
 
     <link rel="stylesheet" href="../css/detalle_registro.css" />
@@ -25,6 +25,7 @@
       rel="stylesheet"
     />
   </head>
+
 
   <body>
     <main class="form-signin w-50 m-auto mt-4">

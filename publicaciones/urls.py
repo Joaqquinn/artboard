@@ -25,4 +25,5 @@ urlpatterns = [
     path("perfil/", views.perfil, name="perfil"),
     path("olvidarContraseña/", views.olvidarContraseña, name="olvidarContraseña"),
     path("subirFoto/", views.subirFoto, name="subirFoto"),
+    path('imagen/<int:imagen_id>/', views.detalle_imagen, name='detalle_imagen'),
 ]

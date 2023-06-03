@@ -18,7 +18,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.inicio),
+    path('', views.inicio, name='inicio'),
     path("sesion/", views.sesion, name="inicioSesion"),
     path("detalles/", views.detalles, name="detalleFoto"),
     path("modificarContraseña/", views.modificarContraseña, name="modificarContraseña"),

@@ -1,18 +1,25 @@
+from datetime import datetime
 from django.shortcuts import render,get_object_or_404
 from .models import Imagen
 
 # Create your views here.
 def detalle_imagen(request,imagen_id):
     # obtener la imagen correspondiente al id proporcionado
-    imagen = get_object_or_404(Imagen,idImagen=imagen_id)
-
-    contexto = {
-        'imagen':imagen,
-        'descripcion':imagen.descripcion,   
-        'autor':imagen.autor,
-        'fecha': imagen.fecha
+    #imagen = get_object_or_404(Imagen,idImagen=imagen_id)
+    
+    #contexto = {
+        #'imagen':imagen,
+        #'descripcion':imagen.descripcion,   
+        #'autor':imagen.autor,
+        #'fecha': imagen.fecha
+    #}
+    contexto ={
+        'imagen':'linkde la imagen',
+        'descripcion':'descripcion de la imagen',
+        'autor':'joaqin',
+        'fecha': datetime.today(),
     }
-    return render(request, 'detalle_imagen.html', contexto)
+    return render(request, 'publicaciones/detalle_imagen.html', contexto)
 
 
 def inicio(request):

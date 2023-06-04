@@ -1,6 +1,8 @@
 from datetime import datetime
-from django.shortcuts import render,get_object_or_404
-from .models import Imagen
+from django.shortcuts import render,get_object_or_404,redirect
+from .models import *
+from django.contrib import messages
+from .forms import Customcreationform
 
 # Create your views here.
 def detalle_imagen(request,imagen_id):
@@ -29,8 +31,7 @@ def sesion(request):
     return render(request,'publicaciones/iniciar_sesion.html')
 
 
-def registro(request):
-    return render(request,'publicaciones/registrarse.html')
+
 
 def  detalles(request):
     return render(request,'publicaciones/detalle_foto.hmtl')
@@ -47,6 +48,12 @@ def  olvidarContraseña(request):
 def  subirFoto(request):
     return render(request,'publicaciones/subir_foto.html')
 
+
+def registro(request):
+    data = {
+        'form': Customcreationform()
+    }
+    return render(request,'publicaciones/registrarse.html',data)
 
 
 

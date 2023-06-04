@@ -18,7 +18,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.inicio, name='inicio'),
+    path('inicio/', views.inicio, name='inicio'),
     path("sesion/", views.sesion, name="inicioSesion"),
     path("detalles/", views.detalles, name="detalleFoto"),
     path("modificarContraseña/", views.modificarContraseña, name="modificarContraseña"),
@@ -26,4 +26,5 @@ urlpatterns = [
     path("olvidarContraseña/", views.olvidarContraseña, name="olvidarContraseña"),
     path("subirFoto/", views.subirFoto, name="subirFoto"),
     path('imagen/<int:imagen_id>/', views.detalle_imagen, name='detalle_imagen'),
+    path("registro/", views.registro, name='registro'),
 ]

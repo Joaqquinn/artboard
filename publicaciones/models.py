@@ -12,9 +12,10 @@ class Usuario(models.Model):
     idUsuario = models.AutoField(primary_key=True,verbose_name='Codigo Usuario')
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
-    email = models.EmailField(max_length=50)
+    email = models.EmailField(max_length=50) 
     password = models.CharField(max_length=50)
-    rol = models.ForeignKey(Rol,on_delete=models.CASCADE,verbose_name='Rol')
+    def __str__(self):
+        return self.nombre
     
     
 class Publicacion(models.Model):

@@ -1,6 +1,7 @@
 from django import forms
-from .models import *
-from django.contrib.auth.forms import UserCreationForm
+from .models import Usuario
 
-class Customcreationform(UserCreationForm):
-    pass
+class RegistroForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ['nombre', 'apellido', 'email', 'password']

@@ -26,7 +26,7 @@ urlpatterns = [
     path("olvidarContraseña/", views.olvidarContraseña, name="olvidarContraseña"),
     path("subirFoto/", views.subirFoto, name="subirFoto"),
     path('imagen/<int:imagen_id>/', views.detalle_imagen, name='detalle_imagen'),
-    path("registro/", views.registro, name='registro'),
-    path("registro_exitoso/", views.registro_exitoso, name='registro_exitoso'),
+    path("registro/", views.registro, name='registro'), 
+        
     
 ]

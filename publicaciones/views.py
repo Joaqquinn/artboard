@@ -1,12 +1,11 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
-from .models import *
+from .models import * 
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .forms import RegistroForm
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.views import LoginView
-from django.http import HttpResponse
+from django.contrib.auth.models import User
+
+
 
 
 # Create your views here.
@@ -34,25 +33,9 @@ def inicio(request):
 
 
 def sesion(request):
-    if request.method == "POST":
-        # Obtener los datos del formulario
-        email = request.POST.get("email")
-        password = request.POST.get("password")
 
-        # Autenticar al usuario utilizando el correo electrónico
-        user = authenticate(request, email=email, password=password)
-
-        if user is not None:
-            # Iniciar sesión del usuario
-            login(request, user)
-            return redirect("inicio")  # Redirigir a la página principal después del inicio de sesión exitoso
-        else:
-            # El usuario no es válido
-            mensaje_error = "Credenciales inválidas. Inténtalo de nuevo."
-            return render(request, "publicaciones/iniciar_sesion.html", {"error_message": mensaje_error})
-
-    # Si el método no es POST, renderizar el formulario de inicio de sesión
-    return render(request, "publicaciones/iniciar_sesion.html")
+    return render(request, "publicaciones/sesion.html")
+    
 
 
 
@@ -79,14 +62,16 @@ def subirFoto(request):
 
 def registro(request):
     if request.method == "POST":
-        form = RegistroForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("registro_exitoso")
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}!')
+            return redirect("inicio")
     else:
-        form = RegistroForm()
-    return render(request, "publicaciones/registrarse.html", {"form": form})
+        form = UserCreationForm()
+    return render(request, "publicaciones/registro.html", {"form": form})
+    
 
 
-def registro_exitoso(request):
-    return render(request, "publicaciones/registro_exitoso.html")
+    

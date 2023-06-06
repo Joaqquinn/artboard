@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
     path('inicio/', views.inicio, name='inicio'),
-    path("sesion/", views.sesion, name="inicioSesion"),
+    path("sesion/", LoginView.as_view(template_name='publicaciones/iniciar_sesion.html'), name="inicioSesion"),
     path("detalles/", views.detalles, name="detalleFoto"),
     path("modificarContraseña/", views.modificarContraseña, name="modificarContraseña"),
     path("perfil/", views.perfil, name="perfil"),

@@ -4,6 +4,7 @@ from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.models import User
+from .forms import CustomUserCreationForm
 
 
 
@@ -69,7 +70,7 @@ def registro(request):
             messages.success(request, f'Account created for {username}!')
             return redirect("inicio")
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, "publicaciones/registro.html", {"form": form})
 
 def registro_exitoso(request):

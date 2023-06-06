@@ -34,7 +34,7 @@ def inicio(request):
 
 def sesion(request):
 
-    return render(request, "publicaciones/sesion.html")
+    return render(request, "publicaciones/iniciar_sesion.html")
     
 
 
@@ -71,6 +71,9 @@ def registro(request):
     else:
         form = UserCreationForm()
     return render(request, "publicaciones/registro.html", {"form": form})
+
+def registro_exitoso(request):
+    return render(request, "publicaciones/registro_exitoso.html")
     
 
 

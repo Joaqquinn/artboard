@@ -24,8 +24,26 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-      
     <div class="collapse navbar-collapse justify-content-end " id="navbar-menu">
+      {% if user.is_authenticated %}
+      <div class="text-end">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle me-5" type="button" id="userDropdown"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                {{ user.username }}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                <li><a class="dropdown-item" href="./perfil.html">Perfil</a></li>
+                <li><a class="dropdown-item" href="./subir_foto.html">Subir foto</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="./inicio.html">Cerrar Sesión</a></li>
+                <li><a class="dropdown-item" href="./detalle_foto_admin.html">Vista admin</a></li>
+
+
+            </ul>
+        </div>
+    </div>
+    {% else %}
       <div class="text-end ">
         <a href="{% url 'inicioSesion' %}">
           <button type="button" class="btn btn-outline-primary me-2">Iniciar Sesión</button>
@@ -34,7 +52,11 @@
           <button type="button" class="btn btn-primary">Registrarse</button>
         </a>
       </div>
+      
+      {% endif %}
     </div>
+
+
   </header>
   
   <div class="masonry">

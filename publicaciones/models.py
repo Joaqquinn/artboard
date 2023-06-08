@@ -32,6 +32,7 @@ class Publicacion(models.Model):
     descripcion = models.TextField(max_length=500)
     fechaPublicacion = models.DateField(auto_now=False, auto_now_add=False)
     estatus = models.CharField(max_length=50)
+    usuario = models.ForeignKey(User,null=True, on_delete=models.CASCADE, verbose_name='Usuario')
     
     
 class Imagen(models.Model):

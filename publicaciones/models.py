@@ -11,14 +11,14 @@ class Rol(models.Model):
     nombre = models.CharField(max_length=50)
 
 
-class perfil(models.Model):
+class Perfil(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     fotoPerfil = models.ImageField(default='logo.png')
 
-def crear_perfil(sender, instance, created,**kwargs):
-    if created:
-        perfil.objects.create(User)
-post_save.connect(crear_perfil, sender=User)
+    def __str__(self):
+        return f'{self.usuario.username}'
+
+
 
 
 

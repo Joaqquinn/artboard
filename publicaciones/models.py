@@ -1,4 +1,7 @@
 from django.db import models
+from django.db.models.signals import post_save
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 
@@ -6,6 +9,16 @@ from django.db import models
 class Rol(models.Model):
     idRol = models.AutoField(primary_key=True,verbose_name='Codigo Rol')
     nombre = models.CharField(max_length=50)
+
+
+class perfil(models.Model):
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    fotoPerfil = models.ImageField(default='logo.png')
+
+def crear_perfil(sender, instance, created,**kwargs):
+    if created:
+        perfil.objects.create(User)
+post_save.connect(crear_perfil, sender=User)
 
 
 
@@ -34,6 +47,8 @@ class Comentario(models.Model):
     comentario = models.TextField(max_length=500)
     fechaComentario = models.DateTimeField(auto_now_add=True)
     estatus = models.CharField(max_length=50)
+
+
 
 
 

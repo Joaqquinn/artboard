@@ -4,9 +4,10 @@ from django.contrib.auth.models import User
 
 
 class CustomUserCreationForm(UserCreationForm):
-    email = forms.EmailField
+    username = forms.CharField(label='nombre de usuario', min_length=4, max_length=150)
+    email = forms.EmailField(label='correo electrónico')
     password1 = forms.CharField(label='contraseña', widget=forms.PasswordInput)
-    password1 = forms.CharField(label='confirma tu contraseña', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='confirma tu contraseña', widget=forms.PasswordInput)
 
     class Meta:
         model = User

@@ -32,15 +32,6 @@ def detalle_imagen(request, imagen_id):
 def inicio(request):
     return render(request, "publicaciones/inicio.html")
 
-
-def sesion(request):
-
-    return render(request, "publicaciones/iniciar_sesion.html")
-    
-
-
-
-
 def detalles(request):
     return render(request, "publicaciones/detalle_foto.hmtl")
 
@@ -63,8 +54,8 @@ def subirFoto(request):
 
 def registro(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid(): 
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}!')

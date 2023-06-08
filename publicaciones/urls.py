@@ -17,18 +17,47 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth import views as auth_views
+from django.urls import reverse_lazy
+
 
 urlpatterns = [
-    path('inicio/', views.inicio, name='inicio'),
-    path("sesion/", LoginView.as_view(template_name='publicaciones/iniciar_sesion.html'), name="inicioSesion"),
+    path("inicio/", views.inicio, name="inicio"),
+    path(
+        "sesion/",
+        LoginView.as_view(template_name="publicaciones/iniciar_sesion.html"),
+        name="inicioSesion",
+    ),
     path("detalles/", views.detalles, name="detalleFoto"),
     path("modificarContraseña/", views.modificarContraseña, name="modificarContraseña"),
     path("perfil/", views.perfil, name="perfil"),
     path("olvidarContraseña/", views.olvidarContraseña, name="olvidarContraseña"),
     path("subirFoto/", views.subirFoto, name="subirFoto"),
-    path('imagen/<int:imagen_id>/', views.detalle_imagen, name='detalle_imagen'),
-    path("registro/", views.registro, name='registro'), 
+    path("imagen/<int:imagen_id>/", views.detalle_imagen, name="detalle_imagen"),
+    path("registro/", views.registro, name="registro"),
     path("registro_exitoso/", views.registro_exitoso, name="registro_exitoso"),
-        
-    
+    path(
+        "restablecer_contraseña/",
+        auth_views.PasswordResetView.as_view(
+            template_name="publicaciones/restablecer_contraseña.html",
+        ),
+        name="restablecer_contraseña",
+    ),
+    path(
+        "restablecer_enviado/",
+        auth_views.PasswordResetDoneView.as_view(
+            template_name="publicaciones/restablecer_enviado.html"
+        ),
+        name="password_reset_done",
+    ),
+    path(
+        "restablecer_confirmar/<uidb64>/<token>/",
+        auth_views.PasswordResetConfirmView.as_view(template_name='publicaciones/restablecer_confirmar.html'),
+        name="password_reset_confirm",
+    ),
+    path(
+        "restablecer_completo/",
+        auth_views.PasswordResetCompleteView.as_view(),
+        name="password_reset_complete",
+    ),
 ]

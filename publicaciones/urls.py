@@ -32,7 +32,6 @@ urlpatterns = [
     path("modificarContraseña/", views.modificarContraseña, name="modificarContraseña"),
     path("perfil/", views.perfil, name="perfil"),
     path("olvidarContraseña/", views.olvidarContraseña, name="olvidarContraseña"),
-    path("subirFoto/", views.subirFoto, name="subirFoto"),
     path("imagen/<int:imagen_id>/", views.detalle_imagen, name="detalle_imagen"),
     path("registro/", views.registro, name="registro"),
     path("registro_exitoso/", views.registro_exitoso, name="registro_exitoso"),
@@ -52,7 +51,9 @@ urlpatterns = [
     ),
     path(
         "restablecer_confirmar/<uidb64>/<token>/",
-        auth_views.PasswordResetConfirmView.as_view(template_name='publicaciones/restablecer_confirmar.html'),
+        auth_views.PasswordResetConfirmView.as_view(
+            template_name="publicaciones/restablecer_confirmar.html"
+        ),
         name="password_reset_confirm",
     ),
     path(
@@ -60,4 +61,9 @@ urlpatterns = [
         auth_views.PasswordResetCompleteView.as_view(),
         name="password_reset_complete",
     ),
+    path("cerrar_sesion/", views.cerrar_sesion, name="cerrar_sesion"),
+    path('perfil/', views.ver_perfil, name='perfil'),
+
+
 ]
+

@@ -20,17 +20,15 @@ class Perfil(models.Model):
 
 
 class Publicacion(models.Model):
-    idPublicacion = models.AutoField(
-        primary_key=True, verbose_name="Codigo Publicacion"
-    )
+    idPublicacion = models.AutoField(primary_key=True, verbose_name="Codigo Publicacion")
     titulo = models.CharField(max_length=50)
     descripcion = models.TextField(max_length=500)
     fechaPublicacion = models.DateField(auto_now=False, auto_now_add=False)
     estatus = models.CharField(max_length=50)
-    usuario = models.ForeignKey(
-        User, null=True, on_delete=models.CASCADE, verbose_name="Usuario"
-    )
-
+    usuario = models.ForeignKey(User, null=True, on_delete=models.CASCADE, verbose_name="Usuario")
+    Imagen = models.ImageField(upload_to="publicaciones", null=True, blank=True)
+    def __str__(self):
+        return f"{self.titulo}"
 
 class Imagen(models.Model):
     idImagen = models.AutoField(primary_key=True, verbose_name="Codigo Imagen")

@@ -18,7 +18,7 @@
     <header class="navbar navbar-expand-md navbar-dark d-print-none bg-dark text-white px-4">
         <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
             <a href="./inicio_perfil.html" class="text-decoration-none text-white">
-                <img src="../img/DALL·E 2023-04-01 22.40.17 - a cat taking a rainbow photo, digital art-modified.png"
+                <img src={% static 'publicaciones/img/logo.png'%}
                     alt="Tabler" class="navbar-brand-image" width="32" height="32">
                 ARTBOARD
             </a>
@@ -33,10 +33,9 @@
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle me-5" type="button" id="userDropdown"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Joaquín
+                        {{user.username}}
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                        <li><a class="dropdown-item" href="./perfil.html">Perfil</a></li>
                         <li><a class="dropdown-item" href="./subir_foto.html">Subir foto</a></li>
                         <li>
                             <hr class="dropdown-divider">
@@ -55,8 +54,9 @@
         <div class="row">
             <div class="col-md-6 mt-4 border">
                 <div class="profile">
-                    <img src="../img/perfil 3.png" alt="Mi imagen de perfil">
-                    <h2>Joaquin</h2>
+                    <img src="{%static 'publicaciones/img/perfil 3.png'%}" alt="Mi imagen de perfil">
+                    <h2>{{user.username}}
+                    </h2>
                     <p>Descripción breve sobre ti:</p>
                     <ul>
                         <li><strong>Edad:</strong> 25 años</li>
@@ -72,12 +72,12 @@
                 </div>
 
             </div>
-            <div class="col-md-4 border mt-4">
+            <div class="col-md-5 border mt-4">
                 <div class="personal-data">
                     <h2>Datos personales</h2>
                     <ul>
-                        <li><strong>Nombre de usuario:</strong> Joaquin</li>
-                        <li><strong>Correo electrónico:</strong> joaqu.gonzalezl@duocuc.cl</li>
+                        <li><strong>Nombre de usuario:</strong> {{user.username}}</li>
+                        <li><strong>Correo electrónico:</strong> {{user.email}}</li>
                         <li><strong>Contraseña:</strong> ********* <a href="modificar_contraseña.html">Cambiar
                                 contraseña</a></li>
                     </ul>

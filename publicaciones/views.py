@@ -1,9 +1,6 @@
-from datetime import datetime
 from django.shortcuts import render, redirect
 from .models import *
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from django.contrib.auth.models import User
 from .forms import CustomUserCreationForm, PublicacionForm
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -16,9 +13,9 @@ def inicio(request):
     publicaciones = Publicacion.objects.order_by("-fechaPublicacion")
     return render(request, 'publicaciones/inicio.html', {'publicaciones': publicaciones})
 
-def detalle_publicacion(request, idPublicacion):
-    Publicacion= Publicacion.objects.get(idPublicacion=idPublicacion),
-    return render(request, "publicaciones/detalle_foto.hmtl")
+def detalle_publicacion(request, pk):
+    publicacion= Publicacion.objects.get(idPublicacion=pk)
+    return render(request, "publicaciones/detalle_publicacion.html", {'publicacion': publicacion})
 
 
 def modificarContraseña(request):
@@ -62,9 +59,9 @@ def subir_foto(request):
     if request.method == "POST":
         form = PublicacionForm(request.POST, request.FILES)
         if form.is_valid():
-            Publicacion = form.save(commit=False)
-            Publicacion.autor = request.user
-            Publicacion.save()
+            publicacion = form.save(commit=False)
+            publicacion.usuario = request.user
+            publicacion.save()
             return redirect("inicio")
     else:
         form = PublicacionForm(initial={'usuario': request.user})

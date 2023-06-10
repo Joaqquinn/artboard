@@ -75,11 +75,7 @@
                   >Cerrar Sesión</a
                 >
               </li>
-              <li>
-                <a class="dropdown-item" href="./detalle_foto_admin.html"
-                  >Vista admin</a
-                >
-              </li>
+
             </ul>
           </div>
         </div>
@@ -98,47 +94,20 @@
         {% endif %}
       </div>
     </header>
-    <div class="masonry">
-      <div class="item">
-        <img src="{% static 'publicaciones/img/fotoinicio.jpg' %}" alt="">
-      </div>
-    
-      <div class="item">
-        <img src="{% static 'publicaciones/img/1.jpg' %}" alt=""></a>
-      </div>
-    
-      <div class="item">
-        <img src="{% static 'publicaciones/img/fotoinicio.jpg' %}" alt="">
-      </div>
-    
-      <div class="item">
-        <img src="{% static 'publicaciones/img/fotoinicio.jpg' %}" alt="">
-      </div>
-    
-      <div class="item">
-        <img src="{% static 'publicaciones/img/fotoinicio.jpg' %}" alt="">
-      </div>
-    
-      <div class="item">
-        <img src="{% static 'publicaciones/img/fotoinicio.jpg' %}" alt="">
-      </div>
-    
-      <div class="item">
-        <img src="{% static 'publicaciones/img/fotoinicio.jpg' %}" alt="">
-      </div>
-    
-      <div class="item">
-        <img src="{% static 'publicaciones/img/fotoinicio.jpg' %}" alt="">
-      </div>
-    </div>  
 
-    {% for publicacion in publicaciones %}
-    <div>
-      <a href="{% url 'detalle_publicacion' publicacion.idPublicacion %}">
-        <img src="{{ publicacion.Imagen.url }}" alt="Foto">
-      </a>
+    <div class="masonry">
+      {% for publicacion in publicaciones %}
+        <div class="item">
+          
+            <a href="{% url 'detalle_publicacion' publicacion.idPublicacion %}">
+              <img src="{{ publicacion.Imagen.url }}" alt="Foto">
+            </a>
+          
+        </div>
+      {% endfor %}
     </div>
-  {% endfor %}
+
+    
   
   </body>
 

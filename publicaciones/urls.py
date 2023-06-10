@@ -62,7 +62,7 @@ urlpatterns = [
     path("cerrar_sesion/", views.cerrar_sesion, name="cerrar_sesion"),
     path('perfil/', views.ver_perfil, name='perfil'),
     path('subir_foto/', views.subir_foto, name='subir_foto'),
-    path('publicacion/<int:id_publicacion>/', views.detalle_publicacion, name='detalle_publicacion'),
+    path('publicacion/<int:pk>/', views.detalle_publicacion, name='detalle_publicacion'),
 
 
 ]

@@ -28,11 +28,9 @@ urlpatterns = [
         LoginView.as_view(template_name="publicaciones/iniciar_sesion.html"),
         name="inicioSesion",
     ),
-    path("detalles/", views.detalles, name="detalleFoto"),
     path("modificarContraseña/", views.modificarContraseña, name="modificarContraseña"),
     path("perfil/", views.perfil, name="perfil"),
     path("olvidarContraseña/", views.olvidarContraseña, name="olvidarContraseña"),
-    path("imagen/<int:imagen_id>/", views.detalle_imagen, name="detalle_imagen"),
     path("registro/", views.registro, name="registro"),
     path("registro_exitoso/", views.registro_exitoso, name="registro_exitoso"),
     path(
@@ -63,6 +61,8 @@ urlpatterns = [
     ),
     path("cerrar_sesion/", views.cerrar_sesion, name="cerrar_sesion"),
     path('perfil/', views.ver_perfil, name='perfil'),
+    path('subir_foto/', views.subir_foto, name='subir_foto'),
+    path('publicacion/<int:id_publicacion>/', views.detalle_publicacion, name='detalle_publicacion'),
 
 
 ]

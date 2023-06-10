@@ -4,37 +4,20 @@ from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, PublicacionForm
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from .forms import PublicacionForm
+
 
 
 # Create your views here.
-def detalle_imagen(request, imagen_id):
-    # obtener la imagen correspondiente al id proporcionado
-    # imagen = get_object_or_404(Imagen,idImagen=imagen_id)
-
-    # contexto = {
-    #'imagen':imagen,
-    #'descripcion':imagen.descripcion,
-    #'autor':imagen.autor,
-    #'fecha': imagen.fecha
-    # }
-    contexto = {
-        "imagen": "linkde la imagen",
-        "descripcion": "descripcion de la imagen",
-        "autor": "joaqin",
-        "fecha": datetime.today(),
-    }
-    return render(request, "publicaciones/detalle_imagen.html", contexto)
-
 
 def inicio(request):
-    return render(request, "publicaciones/inicio.html")
+    publicaciones = Publicacion.objects.order_by("-fechaPublicacion")
+    return render(request, 'publicaciones/inicio.html', {'publicaciones': publicaciones})
 
-
-def detalles(request):
+def detalle_publicacion(request, idPublicacion):
+    Publicacion= Publicacion.objects.get(idPublicacion=idPublicacion),
     return render(request, "publicaciones/detalle_foto.hmtl")
 
 
@@ -74,18 +57,20 @@ def registro(request):
 def registro_exitoso(request):
     return render(request, "publicaciones/registro_exitoso.html")
 
-
+@login_required
 def subir_foto(request):
     if request.method == "POST":
         form = PublicacionForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            Publicacion = form.save(commit=False)
+            Publicacion.autor = request.user
+            Publicacion.save()
             return redirect("inicio")
     else:
-        form = PublicacionForm()
+        form = PublicacionForm(initial={'usuario': request.user})
 
     contexto = {"form": form}
-    return render(request, "subir_foto.html", contexto)
+    return render(request, "publicaciones/subir_foto.html", contexto)
 
 
 def cerrar_sesion(request):

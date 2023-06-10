@@ -24,7 +24,7 @@
         <img src="{% static 'publicaciones/img/logo.png' %}" alt="Tabler" class="navbar-brand-image" width="32" height="32">
         ARTBOARD
       </a>
-    </h1>2
+    </h1>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -32,11 +32,11 @@
       <div class="text-end">
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle me-5" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            Joaquín
+            {{user.username}}
           </button>
           <ul class="dropdown-menu" aria-labelledby="userDropdown">
             <li><a class="dropdown-item" href="{% url 'perfil'%}">Perfil</a></li>
-            <li><a class="dropdown-item" href="./subir_foto.html">Subir foto</a></li>
+            <li><a class="dropdown-item" href="{% url 'subir_foto'%}">Subir foto</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="./inicio.html">Cerrar Sesión</a></li>
           </ul>

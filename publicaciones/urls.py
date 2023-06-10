@@ -23,11 +23,7 @@ from django.urls import reverse_lazy
 
 urlpatterns = [
     path("inicio/", views.inicio, name="inicio"),
-    path(
-        "sesion/",
-        LoginView.as_view(template_name="publicaciones/iniciar_sesion.html"),
-        name="inicioSesion",
-    ),
+    path("sesion/",LoginView.as_view(template_name="publicaciones/iniciar_sesion.html"),name="inicioSesion",),
     path("modificarContraseña/", views.modificarContraseña, name="modificarContraseña"),
     path("perfil/", views.perfil, name="perfil"),
     path("olvidarContraseña/", views.olvidarContraseña, name="olvidarContraseña"),

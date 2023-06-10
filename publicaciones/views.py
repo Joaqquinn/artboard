@@ -3,7 +3,7 @@ from .models import *
 from django.contrib import messages
 from .forms import CustomUserCreationForm, PublicacionForm
 from django.contrib.auth import logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
 
@@ -82,3 +82,5 @@ def ver_perfil(request):
         "usuario": usuario,
     }
     return (render(request, "publicaciones/perfil.html", contexto),)
+
+

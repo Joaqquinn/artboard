@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from .models import *
 from django.contrib import messages
-from .forms import CustomUserCreationForm, PublicacionForm
+from .forms import ComentarioForm, CustomUserCreationForm, PublicacionForm
 from django.contrib.auth import logout
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -13,10 +13,54 @@ def inicio(request):
     publicaciones = Publicacion.objects.order_by("-fechaPublicacion")
     return render(request, 'publicaciones/inicio.html', {'publicaciones': publicaciones})
 
-def detalle_publicacion(request, pk):
-    publicacion= Publicacion.objects.get(idPublicacion=pk)
-    return render(request, "publicaciones/detalle_publicacion.html", {'publicacion': publicacion})
+    publicacion = Publicacion.objects.get(idPublicacion=pk)
 
+    if request.method == "POST":
+        form = ComentarioForm(request.POST)
+        if form.is_valid():
+            comentario = form.save(commit=False)
+            comentario.idPublicacion = publicacion
+            comentario.save()
+            return redirect('detalle_publicacion', pk=pk)
+    else:
+        form = ComentarioForm()
+
+    return render(request, "publicaciones/detalle_publicacion.html", {'publicacion': publicacion, 'form': form})
+
+
+def detalle_publicacion(request, pk):
+    publicacion = Publicacion.objects.get(idPublicacion=pk)
+
+    if request.method == 'POST':
+        form = ComentarioForm(request.POST)
+        if form.is_valid():
+            comentario = form.save(commit=False)
+            comentario.idPublicacion = publicacion
+            comentario.save()
+            # Agrega cualquier otra lógica adicional que necesites
+    else:
+        form = ComentarioForm()
+
+    comentarios = Comentario.objects.filter(idPublicacion=publicacion)
+
+    return render(request, "publicaciones/detalle_publicacion.html", {
+        'publicacion': publicacion,
+        'form': form,
+        'comentarios': comentarios,
+    })
+
+
+
+def crear_comentario(request, pk):
+    publicacion = get_object_or_404(Publicacion, idPublicacion=pk)
+
+    if request.method == 'POST':
+        form = ComentarioForm(request.POST)
+        if form.is_valid():
+            comentario = form.save(commit=False)
+            comentario.idPublicacion = publicacion
+            comentario.save()
+    return redirect('detalle_publicacion', pk=publicacion.idPublicacion)
 
 def modificarContraseña(request):
     return render(request, "publicaciones/modificar_contraseña.html")
@@ -82,5 +126,14 @@ def ver_perfil(request):
         "usuario": usuario,
     }
     return (render(request, "publicaciones/perfil.html", contexto),)
+
+
+
+
+
+
+
+
+    
 
 

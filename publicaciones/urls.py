@@ -59,7 +59,7 @@ urlpatterns = [
     path('perfil/', views.ver_perfil, name='perfil'),
     path('subir_foto/', views.subir_foto, name='subir_foto'),
     path('publicacion/<int:pk>/', views.detalle_publicacion, name='detalle_publicacion'),
-
+    path('publicacion/<int:pk>/comentario/', views.crear_comentario, name='crear_comentario'),
 
 ]
 

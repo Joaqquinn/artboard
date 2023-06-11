@@ -46,6 +46,7 @@
   </header>
 
   <form method="post" enctype="multipart/form-data" class="mt-4">
+    {% csrf_token %}
     <input type="hidden" name="csrfmiddlewaretoken" value="ebPYEkpA4pApmUsoup4Lv1T8Bw1aqDKsEnC2KqcmSkbLKucJh2IfNABfrv7RGGXc">
     <div class="mb-3">
       <label for="id_titulo" class="form-label">Título:</label>

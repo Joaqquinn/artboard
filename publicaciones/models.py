@@ -33,18 +33,13 @@ class Publicacion(models.Model):
 
 class Imagen(models.Model):
     idImagen = models.AutoField(primary_key=True, verbose_name="Codigo Imagen")
-    idPublicacion = models.ForeignKey(
-        Publicacion, on_delete=models.CASCADE, verbose_name="Id publicacion"
-    )
+    idPublicacion = models.ForeignKey(Publicacion, on_delete=models.CASCADE, verbose_name="Id publicacion")
     nombre = models.TextField(max_length=20)
     archivo = models.CharField(max_length=20)
 
 
 class Comentario(models.Model):
     idComentario = models.AutoField(primary_key=True, verbose_name="Codigo Comentario")
-    idPublicacion = models.ForeignKey(
-        Publicacion, on_delete=models.CASCADE, verbose_name="Id publicacion"
-    )
+    idPublicacion = models.ForeignKey(Publicacion, on_delete=models.CASCADE, verbose_name="Id publicacion")
     comentario = models.TextField(max_length=500)
-    fechaComentario = models.DateTimeField(auto_now_add=True)
-    estatus = models.CharField(max_length=50)
+    usuario = models.ForeignKey(User, null=True, on_delete=models.CASCADE, verbose_name="Usuario")

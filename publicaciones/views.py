@@ -37,7 +37,6 @@ def detalle_publicacion(request, pk):
             comentario = form.save(commit=False)
             comentario.idPublicacion = publicacion
             comentario.save()
-            # Agrega cualquier otra lógica adicional que necesites
     else:
         form = ComentarioForm()
 
@@ -58,6 +57,7 @@ def crear_comentario(request, pk):
         form = ComentarioForm(request.POST)
         if form.is_valid():
             comentario = form.save(commit=False)
+            comentario.usuario = request.user
             comentario.idPublicacion = publicacion
             comentario.save()
     return redirect('detalle_publicacion', pk=publicacion.idPublicacion)
@@ -69,9 +69,6 @@ def modificarContraseña(request):
 def perfil(request):
     return render(request, "publicaciones/perfil.html")
 
-
-def olvidarContraseña(request):
-    return render(request, "publicaciones/olvidar_contraseña.html")
 
 
 def vista_inicio(request):

@@ -13,7 +13,7 @@ class Rol(models.Model):
 
 class Perfil(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-    fotoPerfil = models.ImageField(default="logo.png")
+    foto_perfil = models.ImageField(upload_to='fotos_perfil', null=True, blank=True)
 
     def __str__(self):
         return f"{self.usuario.username}"

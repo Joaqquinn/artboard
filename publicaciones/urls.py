@@ -26,14 +26,9 @@ urlpatterns = [
     path("sesion/",LoginView.as_view(template_name="publicaciones/iniciar_sesion.html"),name="inicioSesion",),
     path("modificarContraseña/", views.modificarContraseña, name="modificarContraseña"),
     path("perfil/", views.perfil, name="perfil"),
-    path("olvidarContraseña/", views.olvidarContraseña, name="olvidarContraseña"),
     path("registro/", views.registro, name="registro"),
     path("registro_exitoso/", views.registro_exitoso, name="registro_exitoso"),
-    path(
-        "restablecer_contraseña/",
-        auth_views.PasswordResetView.as_view(
-            template_name="publicaciones/restablecer_contraseña.html",
-        ),
+    path("restablecer_contraseña/",auth_views.PasswordResetView.as_view(template_name="publicaciones/restablecer_contraseña.html",),
         name="restablecer_contraseña",
     ),
     path(

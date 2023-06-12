@@ -51,28 +51,20 @@
 
 
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 mt-4 border">
+        <div class="row mt-4">
+            <div class="col-md-3 ">
+
                 <div class="profile">
                     <img src="{%static 'publicaciones/img/perfil 3.png'%}" alt="Mi imagen de perfil">
                     <h2>{{user.username}}
                     </h2>
-                    <p>Descripción breve sobre ti:</p>
-                    <ul>
-                        <li><strong>Edad:</strong> 25 años</li>
-                        <li><strong>Ubicación:</strong> Santiago, Chile</li>
-                        <li><strong>Redes sociales:</strong>
-                            <ul>
-                                <li><a href="#">Facebook</a></li>
-                                <li><a href="#">Twitter</a></li>
-                                <li><a href="#">Instagram</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+
                 </div>
 
+
             </div>
-            <div class="col-md-5 border mt-4">
+            
+            <div class="col-md-6">
                 <div class="personal-data">
                     <h2>Datos personales</h2>
                     <ul>
@@ -80,9 +72,15 @@
                         <li><strong>Correo electrónico:</strong> {{user.email}}</li>
                         <li><strong>Contraseña:</strong> ********* <a href="modificar_contraseña.html">Cambiar
                                 contraseña</a></li>
+                        
                     </ul>
+                    <p>
+                        <a class="btn btn-primary" href=""> Editar perfil </a>
+                    </p>
                 </div>
             </div>
+
+
 
 
 

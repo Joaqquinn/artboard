@@ -27,7 +27,9 @@
       <div class="row justify-content-center">
         <div class="col-md-6">
           <h1 class="text-center mb-4">Iniciar Sesión</h1>
-          <img  id ="imagen" src="{% static 'publicaciones/img/logo.png' %}" alt="Logo" class="img-fluid mb-4" />
+          <a href={% url 'inicio' %}>
+            <img  id ="imagen" src="{% static 'publicaciones/img/logo.png' %}" alt="Logo" class="img-fluid mb-4" />
+          </a>
           <form class="form-signin" method="POST">
             {% csrf_token %}  
             <div class="mb-3">

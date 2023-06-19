@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from .models import *
 from django.contrib import messages
-from .forms import ComentarioForm, CustomUserCreationForm, PublicacionForm
+from .forms import ComentarioForm, CustomUserCreationForm, PublicacionForm,ProfileForm
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
@@ -66,6 +66,19 @@ def modificarContraseña(request):
     return render(request, "publicaciones/modificar_contraseña.html")
 
 
+def editar_perfil(request):
+    if request.method =='POST':
+        form = ProfileForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('perfil')
+    else:
+        form = ProfileForm(instance=request.user.perfil)
+    
+
+    
+
+
 def perfil(request):
     return render(request, "publicaciones/perfil.html")
 
@@ -82,7 +95,8 @@ def vista_inicio(request):
 def registro(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
+        if form.is_valid(): 
+            
             form.save()
             username = form.cleaned_data.get("username")
             messages.success(request, f"Account created for {username}!")

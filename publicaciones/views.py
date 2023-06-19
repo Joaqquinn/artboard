@@ -68,12 +68,14 @@ def modificarContraseña(request):
 
 def editar_perfil(request):
     if request.method =='POST':
-        form = ProfileForm(request.POST, request.FILES, instance=request.user)
+        form = ProfileForm(request.POST, request.FILES, instance=request.user.perfil)
         if form.is_valid():
             form.save()
             return redirect('perfil')
+
     else:
         form = ProfileForm(instance=request.user.perfil)
+    return render(request, "publicaciones/editar_perfil.html", {'form': form})
     
 
     

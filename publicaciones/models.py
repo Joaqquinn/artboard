@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
+from PIL import Image
 
 
 
@@ -14,9 +15,20 @@ class Rol(models.Model):
 
 class Perfil(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-    foto_perfil = models.ImageField(upload_to="perfil", null=True, blank=True)
+    foto_perfil = models.ImageField(upload_to="perfil",default='default.jpg')
     def __str__(self):
         return f"{self.usuario.username}"
+    
+    def save(self):
+        super().save()
+
+        img = Image.open(self.foto_perfil.path) # Open image
+
+        # resize image
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size) # Resize image
+            img.save(self.foto_perfil.path) # Save it again and override the larger image
 
 
 class Publicacion(models.Model):

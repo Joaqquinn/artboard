@@ -18,7 +18,7 @@
     <header class="navbar navbar-expand-md navbar-dark d-print-none bg-dark text-white px-4">
         <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
             <a href="{% url 'inicio'%}" class="text-decoration-none text-white">
-                <img src={% static 'publicaciones/img/logo.png'%}
+                <img src="{% static 'publicaciones/img/logo.png'%}"
                     alt="Tabler" class="navbar-brand-image" width="32" height="32">
                 ARTBOARD
             </a>
@@ -55,7 +55,8 @@
             <div class="col-md-3 ">
 
                 <div class="profile">
-                    <img src="{%static 'publicaciones/img/perfil 3.png'%}" alt="Mi imagen de perfil">
+                <img src="{{user.perfil.foto_perfil.url}}" alt="Mi imagen de perfil"> 
+
                     <h2>{{user.username}}
                     </h2>
 
@@ -75,7 +76,7 @@
                         
                     </ul>
                     <p>
-                        <a class="btn btn-primary" href="{% url 'editar_perfil' %}"> Editar perfil </a>
+                        <a class="btn btn-primary" href="{% url 'editar_perfil' %}"> elegir foto de perfil </a>
                     </p>
                 </div>
             </div>

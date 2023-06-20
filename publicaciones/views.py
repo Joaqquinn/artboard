@@ -1,9 +1,11 @@
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect,get_object_or_404
 from .models import *
 from django.contrib import messages
 from .forms import ComentarioForm, CustomUserCreationForm, PublicacionForm,ProfileForm
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 
 
@@ -29,24 +31,45 @@ def inicio(request):
 
 
 def detalle_publicacion(request, pk):
-    publicacion = Publicacion.objects.get(idPublicacion=pk)
+    publicacion = get_object_or_404(Publicacion, idPublicacion=pk)
 
     if request.method == 'POST':
-        form = ComentarioForm(request.POST)
-        if form.is_valid():
-            comentario = form.save(commit=False)
-            comentario.idPublicacion = publicacion
-            comentario.save()
-    else:
-        form = ComentarioForm()
+        if request.user.is_authenticated:
+            if request.user in publicacion.likes.all():
+                # El usuario ya dio like, lo quitamos
+                publicacion.likes.remove(request.user)
+            else:
+                # El usuario no ha dado like, lo agregamos
+                publicacion.likes.add(request.user)
+        else:
+            # El usuario no está autenticado, redirigir a la página de inicio de sesión
+            return redirect('inicioSesion')
 
     comentarios = Comentario.objects.filter(idPublicacion=publicacion)
 
     return render(request, "publicaciones/detalle_publicacion.html", {
         'publicacion': publicacion,
-        'form': form,
         'comentarios': comentarios,
     })
+
+
+def like_publicacion(request, publicacion_id):
+    publicacion = get_object_or_404(Publicacion, idPublicacion=publicacion_id)
+
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            if request.user in publicacion.likes.all():
+                # El usuario ya dio like, lo quitamos
+                publicacion.likes.remove(request.user)
+            else:
+                # El usuario no ha dado like, lo agregamos
+                publicacion.likes.add(request.user)
+        else:
+            # El usuario no está autenticado, redirigir a la página de inicio de sesión
+            return redirect('inicioSesion')
+
+    return redirect('detalle_publicacion', pk=publicacion_id)
+
 
 
 
@@ -62,7 +85,7 @@ def crear_comentario(request, pk):
             comentario.save()
     return redirect('detalle_publicacion', pk=publicacion.idPublicacion)
 
-def modificarContraseña(request):
+def modificar_contraseña(request):
     return render(request, "publicaciones/modificar_contraseña.html")
 
 
@@ -72,7 +95,6 @@ def editar_perfil(request):
         if form.is_valid():
             form.save()
             return redirect('perfil')
-
     else:
         form = ProfileForm(instance=request.user.perfil)
     return render(request, "publicaciones/editar_perfil.html", {'form': form})
@@ -98,7 +120,6 @@ def registro(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid(): 
-            
             form.save()
             username = form.cleaned_data.get("username")
             messages.success(request, f"Account created for {username}!")
@@ -134,12 +155,14 @@ def cerrar_sesion(request):
 
 @login_required
 def ver_perfil(request):
+
+
+
     usuario = request.user
     contexto = {
         "usuario": usuario,
     }
     return (render(request, "publicaciones/perfil.html", contexto),)
-
 
 
 

@@ -19,8 +19,8 @@ class Perfil(models.Model):
     def __str__(self):
         return f"{self.usuario.username}"
     
-    def save(self):
-        super().save()
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
         img = Image.open(self.foto_perfil.path) # Open image
 
@@ -39,7 +39,10 @@ class Publicacion(models.Model):
     estatus = models.CharField(max_length=50)
     usuario = models.ForeignKey(User, null=True, on_delete=models.CASCADE, verbose_name="Usuario")
     Imagen = models.ImageField(upload_to="publicaciones", null=True, blank=True)
-    
+    likes = models.ManyToManyField(User, related_name='likes', blank=True)
+
+    def total_likes(self):
+        return self.likes.count()
     def __str__(self):
         return f"{self.titulo}"
 

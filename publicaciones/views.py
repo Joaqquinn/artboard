@@ -1,4 +1,5 @@
-from django.http import HttpResponseRedirect, JsonResponse
+from http.client import HTTPResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect,get_object_or_404
 from .models import *
 from django.contrib import messages
@@ -165,8 +166,55 @@ def ver_perfil(request):
     return (render(request, "publicaciones/perfil.html", contexto),)
 
 
+def eliminar_publicacion(request, pk):
+    if not request.user.is_superuser:
+        # Si el usuario no es un superusuario, redirigir a otra página o mostrar un mensaje de error
+        return HttpResponse("Acceso denegado")
+
+    publicacion = get_object_or_404(Publicacion, idPublicacion=pk)
+    
+    if request.method == 'POST':
+        publicacion.delete()
+        return redirect('inicio')  # Redirige a la página de inicio después de eliminar la publicación
+    
+    return render(request, 'publicaciones/eliminar_publicacion.html', {'publicacion': publicacion})
 
 
+#def eliminar_comentario(request, pk):
+    # Obtener el comentario que se desea eliminar
+    comentario = get_object_or_404(Comentario, id=pk)
+    
+    # Verificar si el usuario tiene permisos para eliminar el comentario
+    if request.user.is_superuser:
+        # Eliminar el comentario
+        comentario.delete()
+    
+    # Redireccionar a la página de detalle de la publicación o a otra página según tus necesidades
+    return redirect('detalle-publicacion', publicacion_id=comentario.publicacion.idPublicacion)
+
+
+#def modificar_contraseña(request):
+    if request.method == 'POST':
+        contraseña_actual = request.POST.get('current-password')
+        nueva_contraseña = request.POST.get('new-password')
+        confirmar_contraseña = request.POST.get('confirm-password')
+
+        # Verificar si la contraseña actual coincide con la del usuario autenticado
+        if request.user.check_password(contraseña_actual):
+            # Verificar si la nueva contraseña y la confirmación coinciden
+            if nueva_contraseña == confirmar_contraseña:
+                # Cambiar la contraseña del usuario
+                request.user.set_password(nueva_contraseña)
+                request.user.save()
+
+                messages.success(request, 'Contraseña modificada exitosamente.')
+                return redirect('modificar_contraseña')
+            else:
+                messages.error(request, 'La nueva contraseña y la confirmación no coinciden.')
+        else:
+            messages.error(request, 'La contraseña actual es incorrecta.')
+
+    return render(request, 'publicaciones/modificar_contraseña.html')
 
 
 

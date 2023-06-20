@@ -8,9 +8,8 @@ from PIL import Image
 # Create your models here.
 
 
-class Rol(models.Model):
-    idRol = models.AutoField(primary_key=True, verbose_name="Codigo Rol")
-    nombre = models.CharField(max_length=50)
+
+
 
 
 class Perfil(models.Model):

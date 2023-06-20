@@ -14,7 +14,12 @@
  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-
+<style> 
+  h2{
+    text-align: center;
+    margin-top: 30px;
+}
+</style>
 </head>
 
 <body>
@@ -44,7 +49,7 @@
       </div>
     </div>
   </header>
-
+<h2>SUBIR FOTO</h2>
   <form method="post" enctype="multipart/form-data" class="mt-4">
     {% csrf_token %}
     <div class="mb-3">
@@ -57,10 +62,8 @@
       <textarea name="descripcion" class="form-control" cols="40" rows="5" maxlength="500" required="" id="id_descripcion"></textarea>
     </div>
 
-    <div class="mb-3">
-      <label for="id_estatus" class="form-label">Estatus:</label>
-      <input type="text" name="estatus" class="form-control" maxlength="50" required="" id="id_estatus">
-    </div>
+
+
 
     <div class="mb-3">
       <label for="id_Imagen" class="form-label">Imagen:</label>

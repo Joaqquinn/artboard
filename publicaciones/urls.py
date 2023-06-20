@@ -57,6 +57,7 @@ urlpatterns = [
     path('publicacion/<int:pk>/comentario/', views.crear_comentario, name='crear_comentario'),
     path('editar_perfil/', views.editar_perfil, name='editar_perfil'),
     path('publicacion/<int:publicacion_id>/like/', views.like_publicacion, name='like-publicacion'),
-    
+    path('publicaciones/<int:pk>/eliminar/', views.eliminar_publicacion, name='eliminar-publicacion'),
+    path('modificar_contraseña/', views.modificar_contraseña, name='modificar_contraseña'),
 ]
 

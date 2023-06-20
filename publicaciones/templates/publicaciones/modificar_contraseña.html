@@ -18,62 +18,35 @@
 
 </head>
 </body>
-<header class="navbar navbar-expand-md navbar-dark d-print-none bg-dark text-white px-4">
-    <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-        <a href="{% url 'inicio' %}" class="text-decoration-none text-white">
-            <img src="{% static 'publicaciones/img/logo.png' %}"
-                alt="Tabler" class="navbar-brand-image" width="32" height="32">
-            ARTBOARD
-        </a>
-    </h1>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
-        aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end " id="navbar-menu">
-
-        <div class="text-end">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle me-5" type="button" id="userDropdown"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    Joaquín
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                    <li><a class="dropdown-item" href="./perfil.html">Perfil</a></li>
-                    <li><a class="dropdown-item" href="./subir_foto.html">Subir foto</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="./inicio.html">Cerrar Sesión</a></li>
-                </ul>
-            </div>
-        </div>
-
-    </div>
-</header>
 
 
 
+{% comment "" %}
 <div class="row">
     <div class="col-lg-12">
         <h2>MODIFICAR CONTRASEÑA</h2>
-        <form action="#" method="POST">
+
+        <form action="{% url 'modificar_contraseña' %}" method="POST">
+            {% csrf_token %}
             <div class="form-group">
-                <label for="current-password">Contraseña actual:</label>
-                <input type="password" id="current-password" name="current-password" class="form-control">
+                <label for="contraseña_actual">Contraseña actual:</label>
+                <input type="password" id="contraseña_actual" name="contraseña_actual" class="form-control">
             </div>
             <div class="form-group">
-                <label for="new-password">Nueva contraseña:</label>
-                <input type="password" id="new-password" name="new-password" class="form-control">
+                <label for="nueva_contraseña">Nueva contraseña:</label>
+                <input type="password" id="nueva_contraseña" name="nueva_contraseña" class="form-control">
             </div>
             <div class="form-group">
-                <label for="confirm-password">Confirmar nueva contraseña:</label>
-                <input type="password" id="confirm-password" name="confirm-password" class="form-control">
+                <label for="confirmar_contraseña">Confirmar nueva contraseña:</label>
+                <input type="password" id="confirm-password" name="confirmar_contraseña" class="form-control">
             </div>
             <button type="submit" class="btn btn-primary mt-4">Modificar contraseña</button>
         </form>
     </div>
 </div>
+
+{% endcomment %}
+
 
 
 

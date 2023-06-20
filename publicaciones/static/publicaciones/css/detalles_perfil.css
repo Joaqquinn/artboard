@@ -1,90 +1,80 @@
-.profile {
-    background-color: whitesmoke;
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-.profile img {
-    width: 100%;
-    max-width: 200px;
-    display: block;
-    margin: 0 auto 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+  }
+  
+  .profile {
+    text-align: center
+  }
+  
+  .profile img {
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-}
-
-.profile h2 {
-    font-size: 24px;
-    margin-top: 0;
-}
-
-.profile p {
-    font-size: 16px;
-    line-height: 1.5;
-}
-
-.profile ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.profile li {
-    font-size: 16px;
-    line-height: 1.5;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+  
+  .profile h2 {
     margin-bottom: 10px;
-}
-
-.profile li strong {
-    font-weight: bold;
-}
-
-.profile li a {
-    text-decoration: none;
-    color:  #333;
-}
-
-.profile li a:hover {
-    text-decoration: underline;
-}
-
-.personal-data {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-.personal-data h2 {
-    font-size: 24px;
-    margin-top: 0;
-}
-
-.personal-data ul {
-    list-style: none;
-    margin: 0;
+    color: #333;
+  }
+  .personal-data {
+    padding-left: 20px;
+  }
+  
+  .personal-data h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .personal-data ul {
+    list-style-type: none;
     padding: 0;
-}
-
-.personal-data li {
-    font-size: 16px;
-    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  .personal-data li {
     margin-bottom: 10px;
-}
-
-.personal-data li strong {
+    color: #666;
+  }
+  
+  .personal-data strong {
     font-weight: bold;
-}
-
-.personal-data a {
-    color: #007bff;
+  }
+  
+  .personal-data a {
+    color: #3498db;
     text-decoration: none;
-    margin-left: 5px;
-}
-
-.personal-data a:hover {
+  }
+  
+  .personal-data a:hover {
     text-decoration: underline;
-}
-
-
+  }
+  
+  .personal-data .btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .personal-data .btn-primary:hover {
+    background-color: #2386c8;
+  }
+  

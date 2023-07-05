@@ -4,9 +4,10 @@ from django.shortcuts import render, redirect,get_object_or_404
 from .models import *
 from django.contrib import messages
 from .forms import ComentarioForm, CustomUserCreationForm, PublicacionForm,ProfileForm
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+
 
 
 
@@ -121,10 +122,11 @@ def registro(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid(): 
-            form.save()
-            username = form.cleaned_data.get("username")
-            messages.success(request, f"Account created for {username}!")
+            user = form.save() 
+            login(request, user)
             return redirect("inicio")
+        else:
+            return render(request, "publicaciones/registro.html", {"form": form})
     else:
         form = CustomUserCreationForm()
     return render(request, "publicaciones/registro.html", {"form": form})

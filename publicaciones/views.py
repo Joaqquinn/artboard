@@ -6,7 +6,9 @@ from django.contrib import messages
 from .forms import ComentarioForm, CustomUserCreationForm, PublicacionForm,ProfileForm
 from django.contrib.auth import logout, login
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
+from django.urls import reverse_lazy
+from django.contrib.auth.views import PasswordChangeView    
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 
@@ -87,8 +89,7 @@ def crear_comentario(request, pk):
             comentario.save()
     return redirect('detalle_publicacion', pk=publicacion.idPublicacion)
 
-def modificar_contraseña(request):
-    return render(request, "publicaciones/modificar_contraseña.html")
+
 
 
 def editar_perfil(request):
@@ -219,6 +220,10 @@ def eliminar_publicacion(request, pk):
     return render(request, 'publicaciones/modificar_contraseña.html')
 
 
+class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+    template_name= 'publicaciones/modificar_contraseña.html'
+    success_message = 'cambiaste de contraseña'
+    success_url = reverse_lazy("perfil")
 
     
 

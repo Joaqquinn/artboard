@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 from django.contrib.auth.views import LoginView, LogoutView
+
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 
@@ -24,7 +25,6 @@ from django.urls import reverse_lazy
 urlpatterns = [
     path("inicio/", views.inicio, name="inicio"),
     path("sesion/",LoginView.as_view(template_name="publicaciones/iniciar_sesion.html"),name="inicioSesion",),
-    path("modificar_contraseña/", views.modificar_contraseña, name="modificar_contraseña"),
     path("perfil/", views.perfil, name="perfil"),
     path("registro/", views.registro, name="registro"),
     path("registro_exitoso/", views.registro_exitoso, name="registro_exitoso"),
@@ -58,6 +58,6 @@ urlpatterns = [
     path('editar_perfil/', views.editar_perfil, name='editar_perfil'),
     path('publicacion/<int:publicacion_id>/like/', views.like_publicacion, name='like-publicacion'),
     path('publicaciones/<int:pk>/eliminar/', views.eliminar_publicacion, name='eliminar-publicacion'),
-    path('modificar_contraseña/', views.modificar_contraseña, name='modificar_contraseña'),
+    path('modificar_contraseña/',views.ChangePasswordView.as_view(),name='modificar_contraseña'),
 ]
 

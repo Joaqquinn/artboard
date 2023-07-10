@@ -69,8 +69,16 @@
                         <li><strong>Correo electrónico:</strong> {{user.email}}</li>
                     </ul>
                     <p>
-                        <a class="btn btn-primary" href="{% url 'editar_perfil' %}"> elegir foto de perfil </a>
-                        <a class="btn btn-primary" href="{% url 'modificar_contraseña' %}"> modificar contraseña </a>
+                        <div class="d-grid gap-2">
+                            <a href="{% url 'editar_perfil' %}">
+                                <button class="btn btn-outline-secondary" type="button">Cambiar foto de perfil</button>
+                            </a>
+                            <a href="{% url 'modificar_contraseña' %}">
+
+                                <button class="btn btn-outline-secondary" type="button">Modificar Contraseña</button>
+
+                            </a>
+                          </div>
 
                     </p>
                 </div>

@@ -37,6 +37,8 @@ class CustomUserCreationForm(UserCreationForm):
         if  password1 != password2:
             self.add_error("password1","Las contraseñas no coinciden") 
         return cleaned_data
+    
+    
 
 
 class PublicacionForm(forms.ModelForm):

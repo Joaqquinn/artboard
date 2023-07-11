@@ -2,11 +2,13 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Publicacion, Comentario, Perfil
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
 
 class CustomUserCreationForm(UserCreationForm):
     username = forms.CharField(label="nombre de usuario", min_length=4, max_length=150,required=True)
-    email = forms.EmailField(label="correo electrónico",required=True)
+    email = forms.EmailField(label="correo electrónico",required=True   )
     password1 = forms.CharField(label="contraseña", widget=forms.PasswordInput, required=True)
     password2 = forms.CharField(
         label="confirma tu contraseña", widget=forms.PasswordInput,
@@ -32,11 +34,23 @@ class CustomUserCreationForm(UserCreationForm):
 
         # Verificar si el correo electrónico ya está registrado
         if User.objects.filter(email=email).exists():
-            self.add_error("email", "El correo electrónico ya está registrado. Por favor, utilice otro.")
+            raise ValidationError("El correo electrónico ya está registrado. Por favor, utilice otro.")
+
 
         if  password1 != password2:
             self.add_error("password1","Las contraseñas no coinciden") 
+        
+        
+        if "@" in username:
+            self.add_error("username","No puede contener el caracter @ ")
+        
         return cleaned_data
+    
+    
+
+
+        
+
     
     
 

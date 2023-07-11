@@ -170,9 +170,7 @@ def ver_perfil(request):
 
 @login_required(login_url="/publicaciones/sesion/")
 def eliminar_publicacion(request, pk):
-    if not request.user.is_superuser:
-        # Si el usuario no es un superusuario, redirigir a otra página o mostrar un mensaje de error
-        return HttpResponse("Acceso denegado")
+   
 
     publicacion = get_object_or_404(Publicacion, idPublicacion=pk)
     

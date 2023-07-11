@@ -20,6 +20,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 
 
 urlpatterns = [
@@ -58,6 +59,6 @@ urlpatterns = [
     path('editar_perfil/', views.editar_perfil, name='editar_perfil'),
     path('publicacion/<int:publicacion_id>/like/', views.like_publicacion, name='like-publicacion'),
     path('publicaciones/<int:pk>/eliminar/', views.eliminar_publicacion, name='eliminar-publicacion'),
-    path('modificar_contraseña/',views.ChangePasswordView.as_view(),name='modificar_contraseña'),
+    path('modificar_contraseña/',login_required(views.ChangePasswordView.as_view(),login_url="/publicaciones/sesion/"),name='modificar_contraseña'),
 ]
 

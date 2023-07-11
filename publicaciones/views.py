@@ -5,11 +5,11 @@ from .models import *
 from django.contrib import messages
 from .forms import ComentarioForm, CustomUserCreationForm, PublicacionForm,ProfileForm
 from django.contrib.auth import logout, login
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required 
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordChangeView    
-from django.contrib.messages.views import SuccessMessageMixin
-
+from django.contrib.messages.views import SuccessMessageMixin 
+from django.utils.decorators import method_decorator
 
 
 
@@ -56,7 +56,7 @@ def detalle_publicacion(request, pk):
         'comentarios': comentarios,
     })
 
-
+@login_required(login_url="/publicaciones/sesion/")
 def like_publicacion(request, publicacion_id):
     publicacion = get_object_or_404(Publicacion, idPublicacion=publicacion_id)
 
@@ -76,7 +76,7 @@ def like_publicacion(request, publicacion_id):
 
 
 
-
+@login_required(login_url="/publicaciones/sesion/")
 def crear_comentario(request, pk):
     publicacion = get_object_or_404(Publicacion, idPublicacion=pk)
 
@@ -91,7 +91,7 @@ def crear_comentario(request, pk):
 
 
 
-
+@login_required(login_url="/publicaciones/sesion/")
 def editar_perfil(request):
     if request.method =='POST':
         form = ProfileForm(request.POST, request.FILES, instance=request.user.perfil)
@@ -105,7 +105,7 @@ def editar_perfil(request):
 
     
 
-
+@login_required(login_url="/publicaciones/sesion/")
 def perfil(request):
     return render(request, "publicaciones/perfil.html")
 
@@ -136,7 +136,7 @@ def registro(request):
 def registro_exitoso(request):
     return render(request, "publicaciones/registro_exitoso.html")
 
-@login_required
+@login_required(login_url="/publicaciones/sesion/")
 def subir_foto(request):
     if request.method == "POST":
         form = PublicacionForm(request.POST, request.FILES)
@@ -157,7 +157,7 @@ def cerrar_sesion(request):
     return redirect("inicio")
 
 
-@login_required
+@login_required(login_url="/publicaciones/sesion/")
 def ver_perfil(request):
 
 
@@ -168,7 +168,7 @@ def ver_perfil(request):
     }
     return (render(request, "publicaciones/perfil.html", contexto),)
 
-
+@login_required(login_url="/publicaciones/sesion/")
 def eliminar_publicacion(request, pk):
     if not request.user.is_superuser:
         # Si el usuario no es un superusuario, redirigir a otra página o mostrar un mensaje de error
@@ -221,9 +221,12 @@ def eliminar_publicacion(request, pk):
 
 
 class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+
     template_name= 'publicaciones/modificar_contraseña.html'
     success_message = 'cambiaste de contraseña'
     success_url = reverse_lazy("perfil")
+
+
 
     
 

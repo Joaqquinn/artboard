@@ -169,7 +169,7 @@ def ver_perfil(request):
     return (render(request, "publicaciones/perfil.html", contexto),)
 
 @login_required(login_url="/publicaciones/sesion/")
-def eliminar_publicacion(request, pk):
+def eliminar_publicacion(request, pk):  
    
 
     publicacion = get_object_or_404(Publicacion, idPublicacion=pk)
